@@ -82,14 +82,17 @@ namespace OSCDebugger
 				selectedIndex = 0;
 				isPaused = !isPaused;
 				refreshPanels = true;
+				refreshPacketList = true;
 				receiver.IsPaused = isPaused;
 				break;
 			case ConsoleKey.UpArrow:
 				refreshPanels = true;
+				refreshPacketList = true;
 				selectedIndex = Clamp (selectedIndex - 1, 0, receiver.PacketQueue.Count - 1);
 				break;
 			case ConsoleKey.DownArrow:
 				refreshPanels = true;
+				refreshPacketList = true;
 				selectedIndex = Clamp (selectedIndex + 1, 0, receiver.PacketQueue.Count - 1);
 				break;
 			}
