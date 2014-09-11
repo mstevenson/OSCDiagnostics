@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{FAE2D5E4-B211-4F2C-9497-47F27B766133}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>OSCDebugger</RootNamespace>
+    <AssemblyName>OSCDebugger</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConsoleUI\Area.cs" />
+    <Compile Include="ConsoleUI\BorderChars.cs" />
+    <Compile Include="ConsoleUI\CUI.cs" />
+    <Compile Include="ConsoleUI\Justification.cs" />
+    <Compile Include="ConsoleUI\LineStyle.cs" />
+    <Compile Include="ConsoleUI\Position.cs" />
+    <Compile Include="Receiver.cs" />
+    <Compile Include="libs\Bespoke.Common\Assert.cs" />
+    <Compile Include="libs\Bespoke.Common\CommandLineParser.cs" />
+    <Compile Include="libs\Bespoke.Common\ExceptionEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common\InputManager.cs" />
+    <Compile Include="libs\Bespoke.Common\Node.cs" />
+    <Compile Include="libs\Bespoke.Common\ObjectRegistry.cs" />
+    <Compile Include="libs\Bespoke.Common\RandomHelper.cs" />
+    <Compile Include="libs\Bespoke.Common\ServiceContainer.cs" />
+    <Compile Include="libs\Bespoke.Common\SubArray.cs" />
+    <Compile Include="libs\Bespoke.Common\Utility.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\IPServer.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\TcpConnection.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\TcpConnectionEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\TcpDataReceivedEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\TcpServer.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\TransmissionType.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\UdpDataReceivedEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common\Net\UdpServer.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscBundle.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscBundleReceivedEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscClient.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscMessage.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscMessageReceivedEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscPacket.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscPacketReceivedEventArgs.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscServer.cs" />
+    <Compile Include="libs\Bespoke.Common.Osc\OscTimeTag.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="ConsoleUI\" />
+    <Folder Include="libs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libs\Bespoke.Common\.DS_Store" />
+    <None Include="libs\Bespoke.Common\Assert.cs.meta" />
+    <None Include="libs\Bespoke.Common\CommandLineParser.cs.meta" />
+    <None Include="libs\Bespoke.Common\ExceptionEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common\InputManager.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net.meta" />
+    <None Include="libs\Bespoke.Common\Node.cs.meta" />
+    <None Include="libs\Bespoke.Common\ObjectRegistry.cs.meta" />
+    <None Include="libs\Bespoke.Common\RandomHelper.cs.meta" />
+    <None Include="libs\Bespoke.Common\ServiceContainer.cs.meta" />
+    <None Include="libs\Bespoke.Common\SubArray.cs.meta" />
+    <None Include="libs\Bespoke.Common\Utility.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\IPServer.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\TcpConnection.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\TcpConnectionEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\TcpDataReceivedEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\TcpServer.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\TransmissionType.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\UdpDataReceivedEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common\Net\UdpServer.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscBundle.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscBundleReceivedEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscClient.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscMessage.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscMessageReceivedEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscPacket.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscPacketReceivedEventArgs.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscServer.cs.meta" />
+    <None Include="libs\Bespoke.Common.Osc\OscTimeTag.cs.meta" />
+  </ItemGroup>
+</Project>
