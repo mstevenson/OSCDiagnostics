@@ -64,11 +64,14 @@ namespace OSCDebugger
 			if (!IsPaused) {
 				lock (producerQueue) {
 					producerQueue.Enqueue(e.Message);
+					NewMessagesAvailable = true;
 				}
 			}
 		}
 
-		public void Update()
+		public bool NewMessagesAvailable { get; private set; }
+
+		public void Update ()
 		{
 			if (producerQueue.Count > 0) {
 				lock (producerQueue) {
@@ -84,6 +87,7 @@ namespace OSCDebugger
 					PacketQueue.Dequeue ();
 				}
 			}
+			NewMessagesAvailable = false;
 		}
 
 //		public IPAddress BroadcastAddress {

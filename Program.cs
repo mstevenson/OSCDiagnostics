@@ -50,6 +50,7 @@ namespace OSCDebugger
 			// Main loop
 			run = true;
 			while (run) {
+				refreshPacketList = receiver.NewMessagesAvailable;
 				receiver.Update ();
 				while (Console.KeyAvailable) {
 					var key = Console.ReadKey (true);
@@ -69,6 +70,7 @@ namespace OSCDebugger
 		}
 
 		bool refreshPanels = true;
+		bool refreshPacketList;
 
 		void ProcessInput (ConsoleKeyInfo key)
 		{
@@ -104,7 +106,9 @@ namespace OSCDebugger
 			} else {
 				DrawLeftBox (refreshPanels);
 			}
-			DisplayOSCMessages ();
+			if (refreshPacketList) {
+				DisplayOSCMessages ();
+			}
 
 			// Packet info panel
 			if (isPaused) {
@@ -122,6 +126,7 @@ namespace OSCDebugger
 			DrawStatusLine ();
 
 			refreshPanels = false;
+			refreshPacketList = false;
 		}
 
 		public void DrawHeader ()
@@ -193,9 +198,9 @@ namespace OSCDebugger
 			CUI.CursorPosition = Position.Zero;
 			int index = 0;
 
-			foreach (var packet in receiver.PacketQueue) {
-				// Display selection cursor
+			CUI.Clear ();
 
+			foreach (var packet in receiver.PacketQueue) {
 				var message = packet.Address;
 				foreach (var arg in packet.Data) {
 					message += " " + arg.ToString ();
