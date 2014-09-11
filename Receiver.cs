@@ -21,13 +21,15 @@ namespace OSCDebugger
 
 		public IPAddress GetLocalAddress ()
 		{
-			var host = Dns.GetHostEntry(Dns.GetHostName());
-			foreach (IPAddress ip in host.AddressList) {
-				if (ip.AddressFamily.ToString() == "InterNetwork") {
-					return ip;
+			try {
+				var host = Dns.GetHostEntry(Dns.GetHostName());
+				foreach (IPAddress ip in host.AddressList) {
+					if (ip.AddressFamily.ToString() == "InterNetwork") {
+						return ip;
+					}
 				}
-			}
-			return null;
+			} catch {}
+			return IPAddress.None;
 		}
 
 //		public IPAddress GetSubnet (IPAddress address)
