@@ -3,36 +3,59 @@ using System.Collections.Generic;
 using Bespoke.Common.Osc;
 using Bespoke.Common.Net;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace OSCDebugger
 {
 	public class Receiver : IDisposable
 	{
-		OscServer server;
-
 		public Queue<OscPacket> PacketQueue = new Queue<OscPacket> ();
-
 		public int QueueLength = 50;
-
 		public bool IsPaused { get; set; }
+
+		OscServer server;
 
 		Queue<OscPacket> producerQueue = new Queue<OscPacket>();
 		Queue<OscPacket> consumerQueue = new Queue<OscPacket>();
 
+		public IPAddress GetLocalAddress ()
+		{
+			var host = Dns.GetHostEntry(Dns.GetHostName());
+			foreach (IPAddress ip in host.AddressList) {
+				if (ip.AddressFamily.ToString() == "InterNetwork") {
+					return ip;
+				}
+			}
+			return null;
+		}
 
-//		public IPAddress localAddress;
-//		public IPAddress LocalAddress {
-//			get {
-//				var host = Dns.GetHostEntry(Dns.GetHostName());
-//				foreach (IPAddress ip in host.AddressList) {
-//					if (ip.AddressFamily.ToString() == "InterNetwork") {
-//						return ip;
+//		public IPAddress GetSubnet (IPAddress address)
+//		{
+//			foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces()) {
+//				foreach (UnicastIPAddressInformation unicastIPAddressInformation in adapter.GetIPProperties().UnicastAddresses) {
+//					if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork) {
+//						if (address.Equals(unicastIPAddressInformation.Address)) {
+//							return unicastIPAddressInformation.IPv4Mask;
+//						}
 //					}
 //				}
-//				return null;
 //			}
+//			throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", address));
 //		}
 
+		int port = 9000;
+		public int Port {
+			get {
+				return port;
+			}
+			set {
+				if (value != port) {
+					port = value;
+					Initialize ();
+				}
+			}
+		}
 
 		void HandleMessageReceived (object sender, OscMessageReceivedEventArgs e)
 		{
@@ -67,18 +90,7 @@ namespace OSCDebugger
 //			}
 //		}
 
-		int port = 9000;
-		public int Port {
-			get {
-				return port;
-			}
-			set {
-				if (value != port) {
-					port = value;
-					Initialize ();
-				}
-			}
-		}
+
 
 		public void Initialize ()
 		{
